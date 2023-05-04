@@ -22,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={clsx(googleFont.className, 'bg-stone-100')}>
+      <body className={clsx(googleFont.className, 'bg-primary-100')}>
         {children}
       </body>
     </html>

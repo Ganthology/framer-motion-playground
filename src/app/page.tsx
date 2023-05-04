@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { PlaygroundOption } from '../types';
-import carrotImage from '../assets/carrot.png';
+import clsx from 'clsx';
 
 const menuItems: PlaygroundOption[] = [
   {
@@ -19,9 +19,9 @@ const menuItems: PlaygroundOption[] = [
 export default function Home() {
   return (
     <main>
-      <div className='mx-auto max-w-4xl px-4 py-8 md:px-8'>
+      <div className='page-container'>
         <div className='space-y-4'>
-          <h1 className='text-lg font-semibold md:text-2xl'>
+          <h1 className='header'>
             Hello! Welcome to <span className='text-yellow-500'>Ray's ✨</span>{' '}
             Framer Motion playground!
           </h1>
@@ -29,13 +29,27 @@ export default function Home() {
             {menuItems.map((item) => (
               <li key={item.path} className=''>
                 <Link
-                  href={item.path}
-                  className=' hover:text-stone-600 hover:underline'
+                  href={item.disabled ? '' : item.path}
+                  className={clsx(
+                    'text-primary-800',
+                    item.disabled
+                      ? 'cursor-not-allowed'
+                      : 'hover:text-primary-600 hover:underline'
+                  )}
                 >
                   <div>
-                    <h2 className='text-base font-medium md:text-lg'>
-                      {item.title}
-                    </h2>
+                    <div className='flex items-center space-x-2'>
+                      <h2 className='text-base font-medium md:text-lg'>
+                        {item.title}
+                      </h2>
+                      {item.disabled && (
+                        <div className='m-0 flex h-5 items-center rounded-full bg-primary-400 p-0 px-2 leading-3'>
+                          <span className='text-[10px] text-stone-50'>
+                            Coming Soon
+                          </span>
+                        </div>
+                      )}
+                    </div>
                     <p className='text-xs font-light md:text-sm'>
                       {item.description}
                     </p>
